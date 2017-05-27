@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Oupa se weer</title>
+  <link rel="stylesheet" href="node_modules/muicss/dist/css/mui.min.css" />
+  <script src="node_modules/muicss/dist/js/mui.min.js"></script>
+
+
+  <style>
+    #sidenav {
+      height: 100%;
+      width: 250px;
+      padding: 0em 0em;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      /* 0.5 second transition effect to slide in the sidenav */
+      color: white;
+      box-shadow: 5px 0px 15px 0px rgba(2, 2, 2, 0.5);
+    }
+
+    #sidenav hr {
+      color: white;
+      border-top: 1px solid #666;
+    }
+
+    #content-wrapper {
+      position: relative;
+      margin-left: 250px;
+      padding: 1em;
+    }
+
+    ul#sectionList {
+      padding: 0;
+    }
+
+    ul#sectionList li {
+      list-style: none;
+      border: 1px solid #333;
+      cursor: pointer;
+      margin: 0.3em;
+      padding: 0.5em;
+      border-radius: 4px;
+    }
+
+    ul#sectionList li[selected] {
+      color: #333;
+      background-color: white;
+    }
+
+    section {
+      transition: 0.5s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="sidedrawer">
+    <nav id="sidenav">
+      <div>
+        <h2 class="mui--appbar-line-height" style="text-align: center;">Oupa se weer</h2>
+        <!-- <hr/> -->
+        <ul id="sectionList">
+        </ul>
+      </div>
+    </nav>
+    <div style="clear: both;"></div>
+  </div>
+
+  <div id="content-wrapper">
+
+    <section data-route="inskrywings">
+      <h1>Inskrywings</h1>
+      <hr/>
+      <ul id="peopleList">
+
+      </ul>
+    </section>
+
+    <section data-route="brabbell" hidden>
+      <h1>Brabbel</h1>
+      <hr/>
+      <p>content Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod ante eu laoreet fermentum. Morbi nec est diam. Mauris non scelerisque odio, et rhoncus libero. Proin condimentum odio varius nibh accumsan interdum. Aliquam nisl sapien,
+        sagittis vel tellus non, facilisis pharetra eros. Proin ac ex eget ligula suscipit tristique.
+      </p>
+
+      <p>
+        Integer dictum erat consequat est pellentesque mollis. Suspendisse auctor odio id sem placerat, eu consequat nunc rhoncus. Nulla rhoncus feugiat lacus, ac bibendum mauris fermentum quis. Integer augue mi, malesuada in volutpat quis, tristique non arcu.
+        Phasellus congue libero et mi hendrerit, eget dictum felis euismod. Nullam libero odio, eleifend eleifend sem ac, porta scelerisque lorem. Ut condimentum urna et feugiat blandit. In convallis eu velit sed dapibus. In cursus suscipit sem, sit amet
+        condimentum leo euismod non. Donec at nisl quis arcu venenatis dapibus sed sit amet quam. Praesent dui quam, sagittis vitae urna ut, consectetur tempus sapien. Mauris et luctus nibh.</p>
+
+      <p>Nam id convallis sapien, a lobortis tortor. Aliquam sodales erat sit amet arcu porttitor vulputate. Quisque condimentum mauris ipsum, ut feugiat dolor cursus nec. Sed auctor venenatis magna. Proin tortor mi, lacinia in urna euismod, sagittis mattis
+        metus. Integer at est auctor, egestas risus eu, volutpat tellus. Nulla fringilla dolor a auctor rutrum. Etiam volutpat ornare viverra. Duis suscipit, ipsum nec lobortis fringilla, nisi quam sodales libero, malesuada vestibulum ante mauris laoreet
+        ipsum. Sed ornare mollis ultricies. Duis eu felis eros. Aliquam mi erat, cursus quis elit non, cursus lobortis magna. Vestibulum efficitur quam sed eleifend sagittis. Nulla quis augue eu sem volutpat varius. Cras convallis et metus ac condimentum.
+        Vivamus consectetur ultricies metus, ut lacinia urna. Ut nec orci id libero consequat maximus.</p>
+
+      <p>Nunc imperdiet pulvinar orci non lacinia. Morbi maximus eleifend lacus, et feugiat purus dignissim sed. Fusce nec arcu ipsum. In sed odio quis nisi sodales mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. Nulla non tincidunt augue, et congue orci. Nam at est tincidunt ante vestibulum laoreet in quis ante. Maecenas quis efficitur nisl. Sed nulla diam, efficitur vel venenatis eget, rhoncus id velit. Ut pellentesque non erat vel euismod.
+        Morbi eleifend orci id nibh pretium, sit amet dignissim arcu pulvinar. Phasellus nec quam magna. Etiam ut dapibus risus, quis condimentum sem.
+      </p>
+      <p>content Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod ante eu laoreet fermentum. Morbi nec est diam. Mauris non scelerisque odio, et rhoncus libero. Proin condimentum odio varius nibh accumsan interdum. Aliquam nisl sapien,
+        sagittis vel tellus non, facilisis pharetra eros. Proin ac ex eget ligula suscipit tristique.
+      </p>
+
+      <p>
+        Integer dictum erat consequat est pellentesque mollis. Suspendisse auctor odio id sem placerat, eu consequat nunc rhoncus. Nulla rhoncus feugiat lacus, ac bibendum mauris fermentum quis. Integer augue mi, malesuada in volutpat quis, tristique non arcu.
+        Phasellus congue libero et mi hendrerit, eget dictum felis euismod. Nullam libero odio, eleifend eleifend sem ac, porta scelerisque lorem. Ut condimentum urna et feugiat blandit. In convallis eu velit sed dapibus. In cursus suscipit sem, sit amet
+        condimentum leo euismod non. Donec at nisl quis arcu venenatis dapibus sed sit amet quam. Praesent dui quam, sagittis vitae urna ut, consectetur tempus sapien. Mauris et luctus nibh.</p>
+
+      <p>Nam id convallis sapien, a lobortis tortor. Aliquam sodales erat sit amet arcu porttitor vulputate. Quisque condimentum mauris ipsum, ut feugiat dolor cursus nec. Sed auctor venenatis magna. Proin tortor mi, lacinia in urna euismod, sagittis mattis
+        metus. Integer at est auctor, egestas risus eu, volutpat tellus. Nulla fringilla dolor a auctor rutrum. Etiam volutpat ornare viverra. Duis suscipit, ipsum nec lobortis fringilla, nisi quam sodales libero, malesuada vestibulum ante mauris laoreet
+        ipsum. Sed ornare mollis ultricies. Duis eu felis eros. Aliquam mi erat, cursus quis elit non, cursus lobortis magna. Vestibulum efficitur quam sed eleifend sagittis. Nulla quis augue eu sem volutpat varius. Cras convallis et metus ac condimentum.
+        Vivamus consectetur ultricies metus, ut lacinia urna. Ut nec orci id libero consequat maximus.</p>
+
+      <p>Nunc imperdiet pulvinar orci non lacinia. Morbi maximus eleifend lacus, et feugiat purus dignissim sed. Fusce nec arcu ipsum. In sed odio quis nisi sodales mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. Nulla non tincidunt augue, et congue orci. Nam at est tincidunt ante vestibulum laoreet in quis ante. Maecenas quis efficitur nisl. Sed nulla diam, efficitur vel venenatis eget, rhoncus id velit. Ut pellentesque non erat vel euismod.
+        Morbi eleifend orci id nibh pretium, sit amet dignissim arcu pulvinar. Phasellus nec quam magna. Etiam ut dapibus risus, quis condimentum sem.
+      </p>
+      <p>content Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod ante eu laoreet fermentum. Morbi nec est diam. Mauris non scelerisque odio, et rhoncus libero. Proin condimentum odio varius nibh accumsan interdum. Aliquam nisl sapien,
+        sagittis vel tellus non, facilisis pharetra eros. Proin ac ex eget ligula suscipit tristique.
+      </p>
+
+      <p>
+        Integer dictum erat consequat est pellentesque mollis. Suspendisse auctor odio id sem placerat, eu consequat nunc rhoncus. Nulla rhoncus feugiat lacus, ac bibendum mauris fermentum quis. Integer augue mi, malesuada in volutpat quis, tristique non arcu.
+        Phasellus congue libero et mi hendrerit, eget dictum felis euismod. Nullam libero odio, eleifend eleifend sem ac, porta scelerisque lorem. Ut condimentum urna et feugiat blandit. In convallis eu velit sed dapibus. In cursus suscipit sem, sit amet
+        condimentum leo euismod non. Donec at nisl quis arcu venenatis dapibus sed sit amet quam. Praesent dui quam, sagittis vitae urna ut, consectetur tempus sapien. Mauris et luctus nibh.</p>
+
+      <p>Nam id convallis sapien, a lobortis tortor. Aliquam sodales erat sit amet arcu porttitor vulputate. Quisque condimentum mauris ipsum, ut feugiat dolor cursus nec. Sed auctor venenatis magna. Proin tortor mi, lacinia in urna euismod, sagittis mattis
+        metus. Integer at est auctor, egestas risus eu, volutpat tellus. Nulla fringilla dolor a auctor rutrum. Etiam volutpat ornare viverra. Duis suscipit, ipsum nec lobortis fringilla, nisi quam sodales libero, malesuada vestibulum ante mauris laoreet
+        ipsum. Sed ornare mollis ultricies. Duis eu felis eros. Aliquam mi erat, cursus quis elit non, cursus lobortis magna. Vestibulum efficitur quam sed eleifend sagittis. Nulla quis augue eu sem volutpat varius. Cras convallis et metus ac condimentum.
+        Vivamus consectetur ultricies metus, ut lacinia urna. Ut nec orci id libero consequat maximus.</p>
+
+      <p>Nunc imperdiet pulvinar orci non lacinia. Morbi maximus eleifend lacus, et feugiat purus dignissim sed. Fusce nec arcu ipsum. In sed odio quis nisi sodales mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. Nulla non tincidunt augue, et congue orci. Nam at est tincidunt ante vestibulum laoreet in quis ante. Maecenas quis efficitur nisl. Sed nulla diam, efficitur vel venenatis eget, rhoncus id velit. Ut pellentesque non erat vel euismod.
+        Morbi eleifend orci id nibh pretium, sit amet dignissim arcu pulvinar. Phasellus nec quam magna. Etiam ut dapibus risus, quis condimentum sem.
+      </p>
+    </section>
+  </div>
+  <script src="window.js"></script>
+</body>
+
+</html>

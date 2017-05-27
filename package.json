@@ -1,0 +1,19 @@
+{
+  "name": "electron-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^1.4.0",
+    "lokijs": "^1.4.3",
+    "muicss": "^0.9.16"
+  },
+  "devDependencies": {
+    "electron": "^1.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
