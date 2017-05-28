@@ -7,27 +7,81 @@ let db = new loki('db/loki.json', {
   autoload: true,
   autoloadCallback: () => {
     people = db.getCollection('people');
+    if (!people) {
+      people = db.addCollection('people');
+    }
+
+    weatherEntries = people.chain()
+      .simplesort('id')
+      .sort((a,b) => b.id - a.id)
+      .limit(100)
+      .data();
   }
 })
 
-let people = [];
+let weatherEntries = [];
 
 let createElement = (element, text = '') => {
   let el = document.createElement(element);
-  el.innerText = text;
+  if (!(['tr', 'thead', 'tbody'].indexOf(element) > -1)) {
+    el.innerText = text;
+  }
   return el;
 }
 
 setTimeout(() => {
-  console.info(`people loaded: ${JSON.stringify(people.data)}`);
+
+  if (!people) {
+    console.error('people collection not initialised');
+    return;
+  }
+  console.info(`people loaded: ${weatherEntries.length}`);
 
   let pl = document.querySelector('#peopleList');
 
-  people.data.forEach(person => {
-    let pre = createElement('pre');
+  let header = createElement('thead');
+  header.appendChild(createElement('td', 'ID'))
+  header.appendChild(createElement('td', 'Description'))
+  header.appendChild(createElement('td', 'Entry Date'))
+  header.appendChild(createElement('td', 'Capture Date'))
+  header.appendChild(createElement('td', 'Temp. Min.'))
+  header.appendChild(createElement('td', 'Temp. Max.'))
+  pl.appendChild(header);
 
-    pre.appendChild(createElement('code', JSON.stringify(person, null, '  ')));
-    pl.appendChild(pre);
+  weatherEntries.forEach(person => {
+
+    // {
+    //   "id": 1,
+    //   "description": " Lekker herfsweer   \n\n(Olieprys:-  $101.35)",
+    //   "entryDate": "2013-05-01",
+    //   "captureDate": "2013-05-01",
+    //   "minimumTemperature": 5,
+    //   "maximumTemperature": 26,
+    //   "windEntry": {
+    //     "id": 1,
+    //     "description": "",
+    //     "windDirection": "NORTH",
+    //     "windspeed": 0,
+    //     "weatherEntry": null
+    //   },
+    //   "rainEntry": {
+    //     "id": 1,
+    //     "volume": 0,
+    //     "description": "",
+    //     "weatherEntry": null
+    //   }
+    // }
+
+    let tr = createElement('tr');
+    tr.appendChild(createElement("td", person.id))
+    tr.appendChild(createElement("td", person.description))
+    tr.appendChild(createElement("td", person.entryDate))
+    tr.appendChild(createElement("td", person.captureDate))
+    tr.appendChild(createElement("td", person.minimumTemperature))
+    tr.appendChild(createElement("td", person.maximumTemperature))
+
+    //pre.appendChild(createElement('code', JSON.stringify(person, null, '  ')));
+    pl.appendChild(tr);
   })
 
 
@@ -43,8 +97,6 @@ window.addEventListener('load', () => {
     li.innerText = section.getAttribute('data-route');
     sectionSwitcher.appendChild(li);
   })
-
-  //sectionSwitcher.children[0].setAttribute('selected', true);
 
   let sectionSwitchListener = e => {
 
