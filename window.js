@@ -6,20 +6,23 @@ let db = new loki('db/loki.json', {
   adapter: adapter,
   autoload: true,
   autoloadCallback: () => {
-    people = db.getCollection('people');
-    if (!people) {
-      people = db.addCollection('people');
+    allWeatherEntries = db.getCollection('weatherEntries');
+    if (!allWeatherEntries) {
+      allWeatherEntries = db.addCollection('weatherEntries');
     }
 
-    weatherEntries = people.chain()
+    weatherEntries = allWeatherEntries.chain()
       .simplesort('id')
-      .sort((a,b) => b.id - a.id)
+      .sort((a, b) => b.id - a.id)
       .limit(100)
       .data();
   }
 })
 
+let allWeatherEntries = [];
 let weatherEntries = [];
+let page = 0;
+let pageSize = 100;
 
 let createElement = (element, text = '') => {
   let el = document.createElement(element);
@@ -31,15 +34,15 @@ let createElement = (element, text = '') => {
 
 setTimeout(() => {
 
-  if (!people) {
-    console.error('people collection not initialised');
+  if (!weatherEntries) {
+    console.error('allWeatherEntries collection not initialised');
     return;
   }
-  console.info(`people loaded: ${weatherEntries.length}`);
 
-  let pl = document.querySelector('#peopleList');
+  let pl = document.querySelector('#entryHeader');
 
-  let header = createElement('thead');
+  let header = createElement('tr');
+
   header.appendChild(createElement('td', 'ID'))
   header.appendChild(createElement('td', 'Description'))
   header.appendChild(createElement('td', 'Entry Date'))
@@ -48,43 +51,7 @@ setTimeout(() => {
   header.appendChild(createElement('td', 'Temp. Max.'))
   pl.appendChild(header);
 
-  weatherEntries.forEach(person => {
-
-    // {
-    //   "id": 1,
-    //   "description": " Lekker herfsweer   \n\n(Olieprys:-  $101.35)",
-    //   "entryDate": "2013-05-01",
-    //   "captureDate": "2013-05-01",
-    //   "minimumTemperature": 5,
-    //   "maximumTemperature": 26,
-    //   "windEntry": {
-    //     "id": 1,
-    //     "description": "",
-    //     "windDirection": "NORTH",
-    //     "windspeed": 0,
-    //     "weatherEntry": null
-    //   },
-    //   "rainEntry": {
-    //     "id": 1,
-    //     "volume": 0,
-    //     "description": "",
-    //     "weatherEntry": null
-    //   }
-    // }
-
-    let tr = createElement('tr');
-    tr.appendChild(createElement("td", person.id))
-    tr.appendChild(createElement("td", person.description))
-    tr.appendChild(createElement("td", person.entryDate))
-    tr.appendChild(createElement("td", person.captureDate))
-    tr.appendChild(createElement("td", person.minimumTemperature))
-    tr.appendChild(createElement("td", person.maximumTemperature))
-
-    //pre.appendChild(createElement('code', JSON.stringify(person, null, '  ')));
-    pl.appendChild(tr);
-  })
-
-
+  setPage(page);
 }, 1000);
 
 window.addEventListener('load', () => {
@@ -121,3 +88,48 @@ window.addEventListener('load', () => {
   document.addEventListener('click', sectionSwitchListener);
   sectionSwitcher.children[0].click();
 });
+
+function updateEntries(entries) {
+  let entryData = document.querySelector('#entryData');
+  [...entryData.children].forEach(child => child.remove());
+
+  entries.forEach(person => {
+    let tr = createElement('tr');
+    tr.appendChild(createElement("td", person.id))
+    tr.appendChild(createElement("td", person.description))
+    tr.appendChild(createElement("td", person.entryDate))
+    tr.appendChild(createElement("td", person.captureDate))
+    tr.appendChild(createElement("td", person.minimumTemperature))
+    tr.appendChild(createElement("td", person.maximumTemperature))
+
+    entryData.appendChild(tr);
+  })
+}
+
+function setPage(pageNum) {
+  console.info('setPage: ', pageNum);
+  weatherEntries = allWeatherEntries.chain()
+    .simplesort('id')
+    .sort((a, b) => b.id - a.id)
+    .offset((pageSize * pageNum))
+    .limit(pageSize)
+    .data();
+
+  updateEntries(weatherEntries);
+}
+
+function nextPage() {
+  let allEntries = allWeatherEntries.chain().data().length;
+
+  if (((page + 1) * pageSize) < allEntries) {
+    page = page + 1;
+    setPage(page);
+  }
+};
+
+function previousPage() {
+  if (page > 0) {
+    page = page - 1;
+    setPage(page);
+  }
+}
