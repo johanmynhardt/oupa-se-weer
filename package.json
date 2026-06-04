@@ -1,17 +1,19 @@
 {
-  "name": "electron-sandbox",
+  "name": "oupa-se-weer",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "Web version of JWeatherHistory to capture weather data.",
+  "type": "module",
+  "main": "main.mjs",
   "dependencies": {
-    "electron": "^9.1.0",
+    "electron": "^28.0.0",
     "lokijs": "^1.4.3",
     "muicss": "^0.9.16"
   },
   "devDependencies": {
-    "electron": "^9.1.0"
+    "electron": "^28.0.0"
   },
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
