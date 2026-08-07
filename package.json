@@ -5,12 +5,12 @@
   "type": "module",
   "main": "main.mjs",
   "dependencies": {
-    "electron": "^39.8.5",
+    "electron": "^39.8.10",
     "lokijs": "^1.4.3",
     "muicss": "^0.9.16"
   },
   "devDependencies": {
-    "electron": "^39.8.5"
+    "electron": "^39.8.10"
   },
   "scripts": {
     "start": "electron .",
